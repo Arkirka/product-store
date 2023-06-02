@@ -1,5 +1,6 @@
 package ru.vorobyov.computerstore.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,7 +27,7 @@ public class ExceptionHandlerController {
     @ResponseBody
     public ApiErrorResponse handleMethodArgumentNotValid() {
         return new ApiErrorResponse(
-                "Invalid request parameters",
+                "Invalid request parameters!",
                 HttpStatus.BAD_REQUEST.value(),
                 new Date()
         );
@@ -42,7 +43,23 @@ public class ExceptionHandlerController {
     @ResponseBody
     public ApiErrorResponse handleConstraintViolationException() {
         return new ApiErrorResponse(
-                "Invalid request parameters",
+                "Invalid request parameters!",
+                HttpStatus.BAD_REQUEST.value(),
+                new Date()
+        );
+    }
+
+    /**
+     * Handle entity not found exception api error response.
+     *
+     * @return the api error response
+     */
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ApiErrorResponse handleEntityNotFoundException() {
+        return new ApiErrorResponse(
+                "Unable to find entity!",
                 HttpStatus.BAD_REQUEST.value(),
                 new Date()
         );
