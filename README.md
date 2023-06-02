@@ -25,3 +25,5 @@ java -jar .\target\computer-store-0.0.1-SNAPSHOT.jar
 ```
 http://localhost:8080/swagger-ui
 ```
+## Схематическо изображение связей таблиц базы данных
+![alt text](https://github.com/Arkirka/product-store/blob/material/images/products.png)
